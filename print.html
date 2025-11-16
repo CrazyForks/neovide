@@ -147,7 +147,7 @@
         Neovide
     </h1>
     <a href="https://discord.gg/SjFpZdQys6">
-        <img src="https://badgen.net/badge/icon/discord?icon=discord&label" alt="Discord">
+        <img src="https://img.shields.io/discord/896132176091955261?style=flat&logo=discord" alt="Discord">
     </a>
     <a href="https://matrix.to/#/#neovide:matrix.org">
         <img src="https://matrix.to/img/matrix-badge.svg" alt="Chat On Matrix">
@@ -159,7 +159,7 @@
 <div class="hide-mobile">
     <h1>Neovide
         <a href="https://discord.gg/SjFpZdQys6">
-            <img src="https://badgen.net/badge/icon/discord?icon=discord&label" alt="Discord">
+            <img src="https://img.shields.io/discord/896132176091955261?style=flat&logo=discord" alt="Discord">
         </a>
         <a href="https://matrix.to/#/#neovide:matrix.org">
             <img src="https://matrix.to/img/matrix-badge.svg" alt="Chat On Matrix">
@@ -747,6 +747,27 @@ encouraged in order to tune it to your liking.</p>
 <p>When scrolling more than one screen at a time, only this many lines at the end of the scroll action
 will be animated. Set it to 0 to snap to the final position without any animation, or to something
 big like 9999 to always scroll the whole screen, much like Neovide &lt;= 0.10.4 did.</p>
+<h4 id="progress-bar"><a class="header" href="#progress-bar">Progress Bar</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_progress_bar_enabled = v:true
+let g:neovide_progress_bar_height = 5.0
+let g:neovide_progress_bar_animation_speed = 200.0
+let g:neovide_progress_bar_hide_delay = 0.2
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_progress_bar_enabled = true
+vim.g.neovide_progress_bar_height = 5.0
+vim.g.neovide_progress_bar_animation_speed = 200.0
+vim.g.neovide_progress_bar_hide_delay = 0.2
+</code></pre>
+<p><strong>Unreleased yet.</strong></p>
+<ul>
+<li><code>g:neovide_progress_bar_enabled</code> sets whether the progress bar is enabled.</li>
+<li><code>g:neovide_progress_bar_height</code> sets the height of the progress bar in pixels.</li>
+<li><code>g:neovide_progress_bar_animation_speed</code> sets the speed of the progress bar animation.</li>
+<li><code>g:neovide_progress_bar_hide_delay</code> sets the delay in seconds before the progress bar is
+hidden after reaching 100%.</li>
+</ul>
 <h4 id="hiding-the-mouse-when-typing"><a class="header" href="#hiding-the-mouse-when-typing">Hiding the mouse when typing</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_hide_mouse_when_typing = v:false
@@ -1189,9 +1210,21 @@ particles rotate in accordance to each other, the lower, the more line-wise all 
 <p>Only for the <code>railgun</code> vfx mode.</p>
 <p>Sets the velocity rotation speed of particles. The higher, the less particles actually move and look
 more &quot;nervous&quot;, the lower, the more it looks like a collapsing sine wave.</p>
-<!--
-  vim: textwidth=100
--->
+<h3 id="automatic-settings-should-be-turned-onoff-for-debug-purposes-only"><a class="header" href="#automatic-settings-should-be-turned-onoff-for-debug-purposes-only">Automatic settings, should be turned on/off for debug purposes only</a></h3>
+<p>Note: These settings will be removed when the features are deemed stable. In most cases they are
+only here because the automatic detection of Neovim nightly versions does not always work.</p>
+<h4 id="autodetect-mouse-grid"><a class="header" href="#autodetect-mouse-grid">Autodetect mouse grid</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_has_mouse_grid_detection = v:true
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_has_mouse_grid_detection = true
+</code></pre>
+<p><strong>Unreleased yet.</strong></p>
+<p><strong>Requires Neovim 0.12.0.</strong></p>
+<p>Neovim will detect the mouse grid for much better mouse compatibility when enabled. This is
+automaticaly enabled starting from Neovim Nightly September 20. 2025. You should not try to enable
+it manually for unsupported versions, since the behaviour is undefined.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="commands"><a class="header" href="#commands">Commands</a></h1>
 <p>On startup, Neovide registers some commands for interacting
 with the os and platform window. These are neovim commands
@@ -1207,6 +1240,11 @@ window containing Neovide to the front and activate it. This
 is useful for tools like neovim_remote which can manipulate
 neovim remotely or if long running tasks would like to
 activate the Neovide window after finishing.</p>
+<h2 id="open-config-file-unreleased-yet"><a class="header" href="#open-config-file-unreleased-yet">Open Config File (Unreleased yet)</a></h2>
+<p>Running the <code>NeovideConfig</code> command will open your Neovide
+configuration file for editing. This provides a simple and
+discoverable way to access your settings without needing to
+know the platform-specific path to the file.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="command-line-reference"><a class="header" href="#command-line-reference">Command Line Reference</a></h1>
 <p>Neovide supports a few command line arguments for effecting things which couldn't be set using
 normal vim variables.</p>
@@ -1305,6 +1343,11 @@ to its generalistic purpose.</p>
 </code></pre>
 <p><strong>Available since 0.12.2.</strong></p>
 <p>This sets the window title to be hidden on macOS.</p>
+<h3 id="application-icon"><a class="header" href="#application-icon">Application Icon</a></h3>
+<pre><code class="language-sh">--icon &lt;path&gt;
+</code></pre>
+<p><strong>Unreleased yet.</strong></p>
+<p>This sets a custom application icon. A default icon is bundled with Neovide.</p>
 <h3 id="srgb"><a class="header" href="#srgb">sRGB</a></h3>
 <pre><code class="language-sh">--no-srgb, --srgb or $NEOVIDE_SRGB=0|1
 </code></pre>
@@ -1367,6 +1410,12 @@ permission bit set.</p>
 </code></pre>
 <p>On Linux/Unix, this alters the identification of the window to either X11 or the more modern
 Wayland, depending on what you are running on.</p>
+<h3 id="working-directory"><a class="header" href="#working-directory">Working Directory</a></h3>
+<pre><code class="language-sh">--chdir &lt;path&gt;
+</code></pre>
+<p>Start neovim in the specified working directory. This will impact neovim
+arguments that use relative path names (e.g. file names), and the initial
+working directory for all instances of neovim or terminal.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="config-file"><a class="header" href="#config-file">Config File</a></h1>
 <p><strong>Available since 0.11.0.</strong></p>
 <p>Neovide also support configuration through a config file in <a href="https://toml.io">the toml format</a>.</p>
@@ -1393,6 +1442,7 @@ however.)</p>
 fork = false
 frame = &quot;full&quot;
 idle = true
+icon = &quot;/full/path/to/neovide.ico&quot; # Example path. Default icon is bundled. Use .icns on macOS.
 maximized = false
 mouse-cursor-icon = &quot;arrow&quot;
 neovim-bin = &quot;/usr/bin/nvim&quot; # in reality found dynamically on $PATH if unset
@@ -1430,6 +1480,7 @@ listed above.</p>
 <li><code>width</code>: optional,</li>
 <li><code>hinting</code>: optional,</li>
 <li><code>edging</code>: optional,</li>
+<li><code>underline_offset</code>: optional</li>
 </ul>
 <p>Settings <code>size</code>, <code>width</code>, <code>hinting</code> and <code>edging</code> can be found in
 <a href="configuration.html">Configuration</a>.</p>
@@ -1467,6 +1518,15 @@ string is a font feature.
 <li>Font feature is a string with format <code>+&lt;feature&gt;</code>, <code>-&lt;feature&gt;</code> or <code>&lt;feature&gt;=&lt;value&gt;</code>,
 e.g. <code>+ss01</code>, <code>-calt</code>, <code>ss02=2</code>. <code>+&lt;feature&gt;</code> is a shorthand for <code>&lt;feature&gt;=1</code>,
 <code>-&lt;feature&gt;</code> is a shorthand for <code>&lt;feature&gt;=0</code>.</li>
+</ul>
+</li>
+<li><code>underline_offset</code> is a float that defines the offset between the character baseline and the
+underline.
+<ul>
+<li>If not specified, it will be decided automatically, either if the font contains the required
+metrics, or <code>-1.0</code> by default.</li>
+<li>Positive underline offset values will move the underline below the baseline, while negative
+values move it above.</li>
 </ul>
 </li>
 </ul>
