@@ -150,20 +150,16 @@
 your terminal adds these keybindings, as neovim doesn't have them by default. We can replicate
 this behavior by adding keybindings in neovim.</p>
 <pre><code class="language-lua">if vim.g.neovide then
-  vim.keymap.set('n', '&lt;D-s&gt;', ':w&lt;CR&gt;') -- Save
-  vim.keymap.set('v', '&lt;D-c&gt;', '&quot;+y') -- Copy
-  vim.keymap.set('n', '&lt;D-v&gt;', '&quot;+P') -- Paste normal mode
-  vim.keymap.set('v', '&lt;D-v&gt;', '&quot;+P') -- Paste visual mode
-  vim.keymap.set('c', '&lt;D-v&gt;', '&lt;C-R&gt;+') -- Paste command mode
-  vim.keymap.set('i', '&lt;D-v&gt;', '&lt;ESC&gt;l&quot;+Pli') -- Paste insert mode
-end
+  local function save() vim.cmd.write() end
+  local function copy() vim.cmd([[normal! &quot;+y]]) end
+  local function paste() vim.api.nvim_paste(vim.fn.getreg(&quot;+&quot;), true, -1) end
 
--- Allow clipboard copy paste in neovim
-vim.api.nvim_set_keymap('', '&lt;D-v&gt;', '+p&lt;CR&gt;', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('!', '&lt;D-v&gt;', '&lt;C-R&gt;+', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('t', '&lt;D-v&gt;', '&lt;C-R&gt;+', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('v', '&lt;D-v&gt;', '&lt;C-R&gt;+', { noremap = true, silent = true})
+  vim.keymap.set({ &quot;n&quot;, &quot;i&quot;, &quot;v&quot; }, &quot;&lt;D-s&gt;&quot;, save, { desc = &quot;Save&quot; })
+  vim.keymap.set(&quot;v&quot;, &quot;&lt;D-c&gt;&quot;, copy, { silent = true, desc = &quot;Copy&quot; })
+  vim.keymap.set({ &quot;n&quot;, &quot;i&quot;, &quot;v&quot;, &quot;c&quot;, &quot;t&quot; }, &quot;&lt;D-v&gt;&quot;, paste, { silent = true, desc = &quot;Paste&quot; })
+end
 </code></pre>
+<p>On Windows/Linux, replace <code>&lt;D-*&gt;</code> with <code>&lt;C-*&gt;</code> (or <code>&lt;S-C-*&gt;</code> in terminals that capture Ctrl).</p>
 <h2 id="how-to-enable-floating-and-popupmenu-transparency"><a class="header" href="#how-to-enable-floating-and-popupmenu-transparency">How To Enable Floating And Popupmenu Transparency?</a></h2>
 <p>Those are controlled through the <code>winblend</code> and <code>pumblend</code> options. See their help pages for more,
 but for short: Both options can be values between <code>0</code> (opaque) and <code>100</code> (fully transparent),
@@ -230,6 +226,50 @@ vim.keymap.set({ &quot;n&quot;, &quot;v&quot;, &quot;o&quot; }, &quot;&lt;D-[&gt
   change_transparency(-0.01)
 end, { desc = &quot;Decrease Neovide opacity&quot; })
 </code></pre>
+<h2 id="how-to-enable-preedit-support-of-ime"><a class="header" href="#how-to-enable-preedit-support-of-ime">How To Enable Preedit Support Of IME?</a></h2>
+<p>By default, the IME preedit event—that is, the preview of the text being composed—is not
+implemented. You can implement this preview yourself by using preedit_handler().</p>
+<p>Example:</p>
+<pre><code class="language-lua">local ime_context = {
+  base_col = 0,
+  base_row = 0,
+  preedit_col = 0,
+  preedit_row = 0,
+}
+
+---@param preedit_raw_text string
+---@param cursor_offset [integer, integer]: [start_col, end_col]
+preedit_handler = function(preedit_raw_text, cursor_offset)
+    vim.api.nvim_buf_set_text(
+      0,
+      ime_context.base_row - 1,
+      ime_context.base_col,
+      ime_context.preedit_row - 1,
+      ime_context.preedit_col,
+      {}
+    )
+    ime_context.preedit_col = ime_context.base_col + string.len(preedit_raw_text)
+    vim.api.nvim_buf_set_text(
+      0,
+      ime_context.base_row - 1,
+      ime_context.base_col,
+      ime_context.base_row - 1,
+      ime_context.base_col,
+      { preedit_raw_text }
+    )
+    vim.api.nvim_win_set_cursor(0, { ime_context.preedit_row, ime_context.preedit_col })
+end
+</code></pre>
+<p>Neovide also exposes a Lua function called commit_handler() in addition to preedit_handler(). For
+details, see <a href="api.html#ime-handling">IME handling on the API page</a>.</p>
+<p>If you’d prefer not to set this up yourself, you can use
+<a href="https://github.com/sevenc-nanashi/neov-ime.nvim">sevenc-nanashi/neov-ime.nvim</a>. Please refer to that
+repository for more information. Example: Installation with Lazy.nvim</p>
+<pre><code class="language-lua">return {
+  &quot;sevenc-nanashi/neov-ime.nvim&quot;,
+}
+</code></pre>
+<p>Related: <a href="https://github.com/neovide/neovide/pull/3110">PR #3110</a>, <a href="https://github.com/neovide/neovide/pull/3221">PR #3221</a></p>
 <h2 id="neovide-is-not-picking-up-some-shell-configured-information"><a class="header" href="#neovide-is-not-picking-up-some-shell-configured-information">Neovide Is Not Picking Up Some Shell-configured Information</a></h2>
 <p>...aka <code>nvm use</code> doesn't work, aka anything configured in <code>~/.bashrc</code>/<code>~/.zshrc</code>
 is ignored by Neovide.</p>
