@@ -181,12 +181,18 @@ opengl = false # macOS/Windows only
 # server = &quot;/tmp/nvim.sock&quot; # or &quot;127.0.0.1:7777&quot;
 srgb = false # platform-specific: false (Linux/macOS) or true (Windows)
 tabs = true
-macos-native-tabs = false # macOS only
-macos-pinned-hotkey = &quot;cmd+ctrl+z&quot; # macOS only
-macos-switcher-hotkey = &quot;cmd+ctrl+n&quot; # macOS only, requires macos-native-tabs = true
-macos-tab-prev-hotkey = &quot;cmd+shift+[&quot; # macOS only
-macos-tab-next-hotkey = &quot;cmd+shift+]&quot; # macOS only
-theme = &quot;auto&quot;
+system-native-tabs = false # macOS only
+system-pinned-hotkey = &quot;cmd+ctrl+z&quot; # macOS only
+system-switcher-hotkey = &quot;cmd+ctrl+n&quot; # macOS only, requires system-native-tabs = true
+system-new-window-hotkey = &quot;cmd+n&quot; # macOS only
+system-hide-hotkey = &quot;cmd+h&quot; # macOS only
+system-hide-others-hotkey = &quot;cmd+alt+h&quot; # macOS only
+system-quit-hotkey = &quot;cmd+q&quot; # macOS only
+system-minimize-hotkey = &quot;cmd+m&quot; # macOS only
+system-fullscreen-hotkey = &quot;cmd+ctrl+f&quot; # macOS only
+system-show-all-tabs-hotkey = &quot;cmd+shift+e&quot; # macOS only
+system-tab-prev-hotkey = &quot;cmd+shift+[&quot; # macOS only
+system-tab-next-hotkey = &quot;cmd+shift+]&quot; # macOS only
 title-hidden = false
 vsync = true
 # wayland-app-id = &quot;neovide&quot;
@@ -211,10 +217,13 @@ Settings that are mutually exclusive on the command line (for example <code>size
 <code>maximized</code>) are also mutually exclusive in the config file.</p>
 <h3 id="runtime-settings"><a class="header" href="#runtime-settings">Runtime settings</a></h3>
 <h4 id="window-geometry"><a class="header" href="#window-geometry">Window Geometry</a></h4>
-<p><strong>Nightly.</strong></p>
+<p><strong>Available since 0.16.0.</strong></p>
 <p><code>size</code>, <code>grid</code> and <code>maximized</code> can be hot reloaded from <code>config.toml</code>.</p>
 <p>They are still mutually exclusive. <code>size</code> applies a new pixel size to all live windows, <code>grid</code>
 applies a new Neovim grid size, and <code>maximized</code> updates the live maximized state.</p>
+<h4 id="idle"><a class="header" href="#idle">Idle</a></h4>
+<p><strong>Available since 0.16.0.</strong></p>
+<p><code>idle</code> can be hot reloaded from <code>config.toml</code>.</p>
 <h4 id="font"><a class="header" href="#font"><code>Font</code></a></h4>
 <p><strong>Available since 0.12.1.</strong></p>
 <p><code>[font]</code> table in configuration file contains:</p>

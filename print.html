@@ -594,7 +594,7 @@ let g:neovide_pixel_geometry = &quot;RGBH&quot;
 <pre><code class="language-lua">vim.g.neovide_pixel_geometry = &quot;RGBH&quot;
 vim.g.neovide_pixel_geometry = &quot;RGBH&quot;
 </code></pre>
-<p><strong>Nightly.</strong></p>
+<p><strong>Available since 0.16.0.</strong></p>
 <p>Required for the guifont option <code>#e-subpixelantialias</code> to work. Defaults to &quot;Unknown&quot;.</p>
 <p>Represents the physical location of the red, green, and blue light-emitting elements of your
 monitor. Possible options are &quot;RGBH&quot; (red on the left, green in the middle, and blue on the right,
@@ -617,7 +617,7 @@ vim.g.neovide_padding_left = 0
 <p><strong>Available since 0.10.4.</strong></p>
 <p>Controls the space between the window border and the actual Neovim, which is filled with the
 background color instead.</p>
-<h4 id="background-color-removed-at-nightly-previously-macos-only"><a class="header" href="#background-color-removed-at-nightly-previously-macos-only">Background Color (Removed at Nightly, Previously macOS only)</a></h4>
+<h4 id="background-color-removed-in-0160-previously-macos-only"><a class="header" href="#background-color-removed-in-0160-previously-macos-only">Background Color (Removed in 0.16.0, Previously macOS only)</a></h4>
 <p>This legacy configuration has now been fully removed. Neovide controls the title bar color
 automatically, and setting <code>g:neovide_background_color</code> no longer has any effect.</p>
 <p>If you want a transparent title bar, simply configure <a href="configuration.html#transparency"><code>g:neovide_opacity</code></a>
@@ -641,6 +641,23 @@ let g:neovide_title_text_color = &quot;pink&quot;
 
 vim.g.neovide_title_text_color = &quot;pink&quot;
 </code></pre>
+<h4 id="corner-preference-currently-windows-only"><a class="header" href="#corner-preference-currently-windows-only">Corner Preference (Currently Windows only)</a></h4>
+<p><strong>Available since 0.16.0.</strong></p>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_corner_preference = &quot;round&quot;
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_corner_preference = &quot;round&quot;
+</code></pre>
+<p>Setting <code>g:neovide_corner_preference</code> controls the preferred window corner style when supported by
+Windows.</p>
+<p>Accepted values:</p>
+<ul>
+<li><code>default</code></li>
+<li><code>round</code></li>
+<li><code>round_small</code></li>
+<li><code>do_not_round</code></li>
+</ul>
 <h4 id="window-blur-currently-macos-only"><a class="header" href="#window-blur-currently-macos-only">Window Blur (Currently macOS only)</a></h4>
 <p>VimScript:</p>
 <pre><code class="language-vim">let g:neovide_window_blurred = v:true
@@ -760,7 +777,7 @@ vim.g.neovide_progress_bar_height = 5.0
 vim.g.neovide_progress_bar_animation_speed = 200.0
 vim.g.neovide_progress_bar_hide_delay = 0.2
 </code></pre>
-<p><strong>Nightly.</strong></p>
+<p><strong>Available since 0.16.0.</strong></p>
 <ul>
 <li><code>g:neovide_progress_bar_enabled</code> sets whether the progress bar is enabled.</li>
 <li><code>g:neovide_progress_bar_height</code> sets the height of the progress bar in pixels.</li>
@@ -785,7 +802,7 @@ mouse makes it visible again.</p>
 <p>Lua:</p>
 <pre><code class="language-lua">vim.g.neovide_message_area_drag_selection = false
 </code></pre>
-<p><strong>Nightly.</strong></p>
+<p><strong>Available since 0.16.0.</strong></p>
 <p>Set this to <code>v:false</code> to disable drag selection in Neovide message windows, for example
 <code>:messages</code> or shell command output. This is enabled by default.</p>
 <h4 id="underline-automatic-scaling"><a class="header" href="#underline-automatic-scaling">Underline automatic scaling</a></h4>
@@ -812,7 +829,7 @@ clipped by the line of text below.</p>
 <p>Set the <a href="https://neovim.io/doc/user/options.html#&#x27;background&#x27;"><code>background</code></a> option when Neovide
 starts. Possible values: <em>light</em>, <em>dark</em>, <em>auto</em>. On systems that support it, <em>auto</em> will mirror the
 system theme, and will update <code>background</code> when the system theme changes.</p>
-<p><strong>Nightly.</strong></p>
+<p><strong>Available since 0.16.0.</strong></p>
 <p><strong>NOTE:</strong> The meaning of the setting has changed in 0.16.0. The default value of the Neovim
 <a href="https://neovim.io/doc/user/options.html#&#x27;background&#x27;"><code>background</code></a> option is now always
 automatically set, and updates according to the system theme, as long as the user has not set it to
@@ -955,9 +972,20 @@ and the flickering does not bother as much.</p>
 <p>Lua:</p>
 <pre><code class="language-lua">vim.g.neovide_highlight_matching_pair = true
 </code></pre>
-<p><strong>Nightly.</strong></p>
+<p><strong>Available since 0.16.0.</strong></p>
 <p>When enabled, Neovide highlights the matching pair using the system find indicator. The
 default is <code>false</code>.</p>
+<h4 id="window-proxy-icon-macos-only"><a class="header" href="#window-proxy-icon-macos-only">Window Proxy Icon (macOS only)</a></h4>
+<p>VimScript:</p>
+<pre><code class="language-vim">let g:neovide_proxy_icon = v:true
+</code></pre>
+<p>Lua:</p>
+<pre><code class="language-lua">vim.g.neovide_proxy_icon = true
+</code></pre>
+<p>When set to <code>true</code> Neovide exposes the current file as a native macOS window proxy icon in the
+title bar and reflects the current buffer's modified state through the standard document-edited
+indicator.</p>
+<p>Note: recommended setup is <code>--frame full</code> with titles enabled for a cleaner look.</p>
 <h3 id="input-settings"><a class="header" href="#input-settings">Input Settings</a></h3>
 <h4 id="macos-option-key-is-meta"><a class="header" href="#macos-option-key-is-meta">macOS Option Key is Meta</a></h4>
 <p>Possible values are <code>both</code>, <code>only_left</code>, <code>only_right</code>, <code>none</code>. Set to <code>none</code> by default.</p>
@@ -1012,13 +1040,13 @@ vim.api.nvim_create_autocmd({ &quot;CmdlineEnter&quot;, &quot;CmdlineLeave&quot;
 })
 </code></pre>
 <h4 id="macos-multi-window-editors"><a class="header" href="#macos-multi-window-editors">macOS Multi-window (Editors)</a></h4>
-<p><strong>Available on Nightly.</strong></p>
+<p><strong>Available since 0.16.0.</strong></p>
 <p>Neovide can show multiple windows on macOS either as separate OS windows or as native tabs inside a
 single host window.</p>
-<p>Set <code>macos-native-tabs = true</code> to merge windows into a tab group. The native tab bar stays hidden
+<p>Set <code>system-native-tabs = true</code> to merge windows into a tab group. The native tab bar stays hidden
 until more than one tab exists to keep a clean single-window look.</p>
-<p>Use Window &gt; New Window (cmd+n) or the Dock menu to open another Neovide window. If native tabs
-are enabled, new windows become tabs in the host window.</p>
+<p>Use Window &gt; New Window (default: <code>cmd+n</code>) or the Dock menu to open another Neovide window. If
+native tabs are enabled, new windows become tabs in the host window.</p>
 <p>If you have native tabs enabled, the Window menu shows an Editors entry and the Editors hotkey
 becomes available. You can also remap the in-app tab cycling shortcuts.</p>
 <h4 id="macos-global-activation-shortcuts"><a class="header" href="#macos-global-activation-shortcuts">macOS Global Activation Shortcuts</a></h4>
@@ -1029,24 +1057,35 @@ window. If that window is already active, the shortcut hides it; otherwise it br
 to the front.</li>
 <li><strong>Editors</strong> <kbd>⌘</kbd> + <kbd>⌃</kbd> + <kbd>N</kbd> opens the Editors (tab overview) view so
 you can pick another Neovide window. This shortcut is only available when
-<code>macos-native-tabs = true</code> and if only one window exists, it behaves the same as the pinned
+<code>system-native-tabs = true</code> and if only one window exists, it behaves the same as the pinned
 shortcut.</li>
 </ul>
 <p>Customize them by setting the environment variables:</p>
-<pre><code class="language-bash">launchctl setenv NEOVIDE_MACOS_PINNED_HOTKEY &quot;ctrl+shift+z&quot;
-launchctl setenv NEOVIDE_MACOS_SWITCHER_HOTKEY &quot;ctrl+shift+n&quot;
+<pre><code class="language-bash">launchctl setenv NEOVIDE_SYSTEM_PINNED_HOTKEY &quot;ctrl+shift+z&quot;
+launchctl setenv NEOVIDE_SYSTEM_SWITCHER_HOTKEY &quot;ctrl+shift+n&quot;
 </code></pre>
 <p>Use <code>cmd</code>, <code>ctrl</code>, <code>alt</code>, and <code>shift</code> for modifiers and a single character for the key.</p>
 <p>To disable a shortcut entirely, set the corresponding variable to <code>false</code> or leave it empty.</p>
 <p>If a shortcut does not work, it may conflict with another global shortcut or be rejected by the
 system. Check the Neovide log for warnings.</p>
 <p>You can also configure them inside <code>config.toml</code>:</p>
-<pre><code class="language-toml">macos-pinned-hotkey = &quot;ctrl+shift+z&quot;
-macos-switcher-hotkey = &quot;ctrl+shift+n&quot;
+<pre><code class="language-toml">system-pinned-hotkey = &quot;ctrl+shift+z&quot;
+system-switcher-hotkey = &quot;ctrl+shift+n&quot;
 </code></pre>
-<p>When <code>macos-native-tabs</code> is enabled, you can also customize the in-app tab navigation shortcuts:</p>
-<pre><code class="language-toml">macos-tab-prev-hotkey = &quot;cmd+shift+[&quot;
-macos-tab-next-hotkey = &quot;cmd+shift+]&quot;
+<p>You can also remap the macOS application and Window menu shortcuts:</p>
+<pre><code class="language-toml">system-hide-hotkey = &quot;cmd+h&quot;
+system-hide-others-hotkey = &quot;cmd+alt+h&quot;
+system-quit-hotkey = &quot;cmd+q&quot;
+system-new-window-hotkey = &quot;cmd+n&quot;
+system-minimize-hotkey = &quot;cmd+m&quot;
+system-fullscreen-hotkey = &quot;cmd+ctrl+f&quot;
+system-show-all-tabs-hotkey = &quot;cmd+shift+e&quot;
+</code></pre>
+<p>Set any of them to <code>false</code> (or an empty value) to remove the menu shortcut while keeping the menu
+item.</p>
+<p>When <code>system-native-tabs</code> is enabled, you can also customize the in-app tab navigation shortcuts:</p>
+<pre><code class="language-toml">system-tab-prev-hotkey = &quot;cmd+shift+[&quot;
+system-tab-next-hotkey = &quot;cmd+shift+]&quot;
 </code></pre>
 <p>These work only while Neovide is focused so the keypress never reaches Neovim, mirroring the native
 macOS tab cycling workflow.</p>
@@ -1316,7 +1355,7 @@ only here because the automatic detection of Neovim nightly versions does not al
 <p>Lua:</p>
 <pre><code class="language-lua">vim.g.neovide_has_mouse_grid_detection = true
 </code></pre>
-<p><strong>Nightly.</strong></p>
+<p><strong>Available since 0.16.0.</strong></p>
 <p><strong>Requires Neovim 0.12.0.</strong></p>
 <p>Neovim will detect the mouse grid for much better mouse compatibility when enabled. This is
 automaticaly enabled starting from Neovim Nightly September 20. 2025. You should not try to enable
@@ -1336,7 +1375,7 @@ window containing Neovide to the front and activate it. This
 is useful for tools like neovim_remote which can manipulate
 neovim remotely or if long running tasks would like to
 activate the Neovide window after finishing.</p>
-<h2 id="force-click-macos-nightly"><a class="header" href="#force-click-macos-nightly">Force Click (macOS) (Nightly)</a></h2>
+<h2 id="force-click-macos-available-since-0160"><a class="header" href="#force-click-macos-available-since-0160">Force Click (macOS) (Available since 0.16.0)</a></h2>
 <p>On macOS, <code>:NeovideForceClick</code> triggers native force-click behaviours for whatever is under the
 cursor. Plain text falls back to the usual &quot;Look Up&quot; popover; file paths and URLs both open in the
 <a href="https://developer.apple.com/documentation/quicklook">Quick Look</a> panel, so you get previews
@@ -1352,7 +1391,7 @@ automatically and you can bind it manually if you want to trigger it from anothe
 <pre><code class="language-vim">nnoremap &lt;silent&gt; &lt;X1Mouse&gt; :NeovideForceClick&lt;CR&gt;
 nnoremap &lt;silent&gt; &lt;leader&gt;k :NeovideForceClick&lt;CR&gt;
 </code></pre>
-<h2 id="open-config-file-nightly"><a class="header" href="#open-config-file-nightly">Open Config File (Nightly)</a></h2>
+<h2 id="open-config-file-available-since-0160"><a class="header" href="#open-config-file-available-since-0160">Open Config File (Available since 0.16.0)</a></h2>
 <p>Running the <code>NeovideConfig</code> command will open your Neovide
 configuration file for editing. This provides a simple and
 discoverable way to access your settings without needing to
@@ -1458,7 +1497,7 @@ to its generalistic purpose.</p>
 <h3 id="application-icon"><a class="header" href="#application-icon">Application Icon</a></h3>
 <pre><code class="language-sh">--icon &lt;path&gt;
 </code></pre>
-<p><strong>Nightly.</strong></p>
+<p><strong>Available since 0.16.0.</strong></p>
 <p>This sets a custom application icon. A default icon is bundled with Neovide.</p>
 <h3 id="srgb"><a class="header" href="#srgb">sRGB</a></h3>
 <pre><code class="language-sh">--no-srgb, --srgb or $NEOVIDE_SRGB=0|1
@@ -1488,18 +1527,56 @@ for more details.</p>
 tabs to avoid confusing new users. <code>--no-tabs</code> disables this behavior.</p>
 <p>Note: Even if files are opened in tabs, they're buffers anyways. It's just about them being visible
 or not.</p>
-<h3 id="macos-native-tabs"><a class="header" href="#macos-native-tabs">macOS Native Tabs</a></h3>
-<pre><code class="language-sh">--no-macos-native-tabs, --macos-native-tabs or $NEOVIDE_MACOS_NATIVE_TABS=0|1
+<h3 id="reuse-existing-instance-macos-only"><a class="header" href="#reuse-existing-instance-macos-only">Reuse Existing Instance (macOS Only)</a></h3>
+<pre><code class="language-sh">--reuse-instance
+</code></pre>
+<p><strong>Available since 0.16.0.</strong></p>
+<p>If another Neovide instance is already running, it forwards the file-open request to that
+instance instead of starting a second app process.</p>
+<p>If no handoff listener is running, it falls back to normal startup and opens a fresh instance.</p>
+<p>This handoff path is skipped when <code>--server</code> is set, so <code>--reuse-instance --server &lt;address&gt;</code>
+connects using the normal server flow instead of reusing an existing neovide instance.</p>
+<p>When the request is forwarded, <code>--tabs</code> and <code>--no-tabs</code> still apply to the files being opened in
+the reused instance.</p>
+<p>If <code>--chdir &lt;path&gt;</code> is also set, the reused instance receives that path as the target working
+directory for the request. Relative file paths are still resolved from the caller's current working
+directory before they are forwarded.</p>
+<h3 id="new-window-macos-only"><a class="header" href="#new-window-macos-only">New Window (macOS Only)</a></h3>
+<pre><code class="language-sh">--new-window
+</code></pre>
+<p><strong>Available since 0.16.0.</strong></p>
+<p>Requires <code>--reuse-instance</code></p>
+<p>When used together with <code>--reuse-instance</code>, Neovide asks the running instance to create a new OS
+window before opening the requested files.</p>
+<p>If no handoff listener is running, Neovide falls back to normal startup. In that case,
+<code>--new-window</code> has no separate effect beyond the normal launch.</p>
+<p><code>--tabs</code>, <code>--no-tabs</code> and <code>--chdir &lt;path&gt;</code> still apply to the forwarded request in the same way
+as with <code>--reuse-instance</code> works.</p>
+<h3 id="system-native-tabs"><a class="header" href="#system-native-tabs">System Native Tabs</a></h3>
+<pre><code class="language-sh">--no-system-native-tabs, --system-native-tabs or $NEOVIDE_SYSTEM_NATIVE_TABS=0|1
 </code></pre>
 <p>Neovide merges macOS windows into a single host window automatically and hides the native tab bar by
 default to mimic a standalone window. Enable this option to keep the tab bar visible so every window
 shows up as a tab immediately. The setting applies to windows opened through both global shortcuts
 and the Editors menu entry.</p>
-<h3 id="macos-tab-navigation"><a class="header" href="#macos-tab-navigation">macOS Tab Navigation</a></h3>
-<pre><code class="language-sh">--macos-tab-prev-hotkey &lt;combo&gt; or $NEOVIDE_MACOS_TAB_PREV_HOTKEY
---macos-tab-next-hotkey &lt;combo&gt; or $NEOVIDE_MACOS_TAB_NEXT_HOTKEY
+<h3 id="menu-shortcuts"><a class="header" href="#menu-shortcuts">Menu Shortcuts</a></h3>
+<pre><code class="language-sh">--system-hide-hotkey &lt;combo&gt; or $NEOVIDE_SYSTEM_HIDE_HOTKEY
+--system-hide-others-hotkey &lt;combo&gt; or $NEOVIDE_SYSTEM_HIDE_OTHERS_HOTKEY
+--system-quit-hotkey &lt;combo&gt; or $NEOVIDE_SYSTEM_QUIT_HOTKEY
+--system-new-window-hotkey &lt;combo&gt; or $NEOVIDE_SYSTEM_NEW_WINDOW_HOTKEY
+--system-minimize-hotkey &lt;combo&gt; or $NEOVIDE_SYSTEM_MINIMIZE_HOTKEY
+--system-fullscreen-hotkey &lt;combo&gt; or $NEOVIDE_SYSTEM_FULLSCREEN_HOTKEY
+--system-show-all-tabs-hotkey &lt;combo&gt; or $NEOVIDE_SYSTEM_SHOW_ALL_TABS_HOTKEY
 </code></pre>
-<p>When <code>macos-native-tabs</code> is enabled, these shortcuts let you remap the in-app tab cycling keys
+<p>Remaps the macOS menu shortcuts used by Neovide. The defaults are <code>cmd+h</code>, <code>cmd+alt+h</code>, <code>cmd+q</code>,
+<code>cmd+n</code>, <code>cmd+m</code>, <code>cmd+ctrl+f</code>, and <code>cmd+shift+e</code> for Hide, Hide Others, Quit, New Window,
+Minimize, Enter Full Screen, and Editors respectively. Set any of them to <code>false</code> or leave them
+empty to remove the shortcut while keeping the menu item available.</p>
+<h3 id="system-tab-navigation"><a class="header" href="#system-tab-navigation">System Tab Navigation</a></h3>
+<pre><code class="language-sh">--system-tab-prev-hotkey &lt;combo&gt; or $NEOVIDE_SYSTEM_TAB_PREV_HOTKEY
+--system-tab-next-hotkey &lt;combo&gt; or $NEOVIDE_SYSTEM_TAB_NEXT_HOTKEY
+</code></pre>
+<p>When <code>system-native-tabs</code> is enabled, these shortcuts let you remap the in-app tab cycling keys
 (defaults: <code>cmd+shift+[</code> / <code>cmd+shift+]</code>). Set them to <code>false</code> or leave empty to
 pass the keypress through to Neovim instead.</p>
 <h3 id="opengl-renderer"><a class="header" href="#opengl-renderer">OpenGL Renderer</a></h3>
@@ -1539,7 +1616,7 @@ Wayland, depending on what you are running on.</p>
 <h3 id="working-directory"><a class="header" href="#working-directory">Working Directory</a></h3>
 <pre><code class="language-sh">--chdir &lt;path&gt; or $NEOVIDE_CHDIR
 </code></pre>
-<p><strong>Nightly.</strong></p>
+<p><strong>Available since 0.16.0.</strong></p>
 <p>Start neovim in the specified working directory. This will impact neovim
 arguments that use relative path names (e.g. file names), and the initial
 working directory for all instances of neovim or terminal. This value can
@@ -1582,12 +1659,18 @@ opengl = false # macOS/Windows only
 # server = &quot;/tmp/nvim.sock&quot; # or &quot;127.0.0.1:7777&quot;
 srgb = false # platform-specific: false (Linux/macOS) or true (Windows)
 tabs = true
-macos-native-tabs = false # macOS only
-macos-pinned-hotkey = &quot;cmd+ctrl+z&quot; # macOS only
-macos-switcher-hotkey = &quot;cmd+ctrl+n&quot; # macOS only, requires macos-native-tabs = true
-macos-tab-prev-hotkey = &quot;cmd+shift+[&quot; # macOS only
-macos-tab-next-hotkey = &quot;cmd+shift+]&quot; # macOS only
-theme = &quot;auto&quot;
+system-native-tabs = false # macOS only
+system-pinned-hotkey = &quot;cmd+ctrl+z&quot; # macOS only
+system-switcher-hotkey = &quot;cmd+ctrl+n&quot; # macOS only, requires system-native-tabs = true
+system-new-window-hotkey = &quot;cmd+n&quot; # macOS only
+system-hide-hotkey = &quot;cmd+h&quot; # macOS only
+system-hide-others-hotkey = &quot;cmd+alt+h&quot; # macOS only
+system-quit-hotkey = &quot;cmd+q&quot; # macOS only
+system-minimize-hotkey = &quot;cmd+m&quot; # macOS only
+system-fullscreen-hotkey = &quot;cmd+ctrl+f&quot; # macOS only
+system-show-all-tabs-hotkey = &quot;cmd+shift+e&quot; # macOS only
+system-tab-prev-hotkey = &quot;cmd+shift+[&quot; # macOS only
+system-tab-next-hotkey = &quot;cmd+shift+]&quot; # macOS only
 title-hidden = false
 vsync = true
 # wayland-app-id = &quot;neovide&quot;
@@ -1612,10 +1695,13 @@ Settings that are mutually exclusive on the command line (for example <code>size
 <code>maximized</code>) are also mutually exclusive in the config file.</p>
 <h3 id="runtime-settings"><a class="header" href="#runtime-settings">Runtime settings</a></h3>
 <h4 id="window-geometry"><a class="header" href="#window-geometry">Window Geometry</a></h4>
-<p><strong>Nightly.</strong></p>
+<p><strong>Available since 0.16.0.</strong></p>
 <p><code>size</code>, <code>grid</code> and <code>maximized</code> can be hot reloaded from <code>config.toml</code>.</p>
 <p>They are still mutually exclusive. <code>size</code> applies a new pixel size to all live windows, <code>grid</code>
 applies a new Neovim grid size, and <code>maximized</code> updates the live maximized state.</p>
+<h4 id="idle"><a class="header" href="#idle">Idle</a></h4>
+<p><strong>Available since 0.16.0.</strong></p>
+<p><code>idle</code> can be hot reloaded from <code>config.toml</code>.</p>
 <h4 id="font-1"><a class="header" href="#font-1"><code>Font</code></a></h4>
 <p><strong>Available since 0.12.1.</strong></p>
 <p><code>[font]</code> table in configuration file contains:</p>
@@ -1935,10 +2021,16 @@ useful and can usually help developers to troubleshoot the bug much faster. Here
 collect tracy data.</p>
 <ol>
 <li>
-<p><em>Install tracy.</em> Windows users can download it at
-<a href="https://github.com/wolfpld/tracy/releases">its GitHub release page</a>. Linux and macOS users can
-install it with package manager. Otherwise, you may have to build it yourself following tracy
-docs.</p>
+<p><em>Install tracy.</em> Neovide's profiling build currently depends on
+<code>tracy-client-sys 0.28.0</code>, which expects Tracy <code>v0.13.1</code> to work properly. An Older capture
+binaries will fail with an &quot;incompatible protocol version&quot; error. Windows users can download
+the correct version at <a href="https://github.com/wolfpld/tracy/releases">the Tracy release page</a>.
+macOS and linux users can install it with package manager, but distro packages may lag behind
+and ship an incompatible version.
+If that happens, build Tracy <code>v0.13.1</code> yourself instead. If Neovide updates its Tracy
+dependency later, please check <code>Cargo.toml</code> for the current <code>tracy-client-sys</code> version and
+verify the matching Tracy release in the crate's compatibility
+<a href="https://github.com/nagisa/rust_tracy_client#version-support-table">table</a>.</p>
 </li>
 <li>
 <p><em>Build a profiling version of Neovide.</em> Follow
@@ -2028,7 +2120,7 @@ end)
 </code></pre>
 <p>Credits to <a href="https://github.com/neovide/neovide/pull/1589">BHatGuy here</a>.</p>
 <h2 id="how-can-i-dynamically-change-the-transparency-at-runtime-macos"><a class="header" href="#how-can-i-dynamically-change-the-transparency-at-runtime-macos">How can I Dynamically Change The Transparency At Runtime? (macOS)</a></h2>
-<p>from Nightly release <code>g:neovide_background_color</code> has been removed. To adjust the window
+<p>from <code>0.16.0</code>, <code>g:neovide_background_color</code> has been removed. To adjust the window
 transparency at runtime on macOS you only need to update <code>g:neovide_opacity</code> (and optionally
 <code>g:neovide_normal_opacity</code> for the editor background). Here is a simple example that binds the
 Command-<code>]</code>/Command-<code>[</code> keys to tweak the opacity:</p>
